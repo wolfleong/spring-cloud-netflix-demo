@@ -1,0 +1,3 @@
+rootProject.name = 'spring-cloud-netflix-test'
+
+include "eureka-server", "eureka-client", "zuul-server"

@@ -1,0 +1,10 @@
+
+dependencies {
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"){
+        exclude group: "com.fasterxml.jackson.dataformat", module: "jackson-dataformat-xml"
+    }
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
+    implementation "org.springframework.cloud:spring-cloud-starter-netflix-ribbon"
+}
+
+

@@ -1,0 +1,49 @@
+
+buildscript {
+    ext {
+        springBootVersion = '2.3.2.RELEASE'
+        springBootManagementVersion = '1.0.9.RELEASE'
+        springCloudVersion = 'Hoxton.SR6'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${springBootManagementVersion}")
+    }
+}
+
+allprojects {
+    group = 'com.wl'
+    version = '0.0.1-SNAPSHOT'
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = JavaVersion.VERSION_14
+    targetCompatibility = JavaVersion.VERSION_14
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compile 'org.springframework.cloud:spring-cloud-starter'
+    }
+    dependencyManagement {
+        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+        imports { mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}" }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    jar {
+        manifest.attributes provider: 'gradle'
+    }
+}
